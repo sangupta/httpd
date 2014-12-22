@@ -4,6 +4,18 @@ httpd
 `httpd` is a simple HTTP server for development that serves the directory from which 
 it is run over HTTP. Directory listing and proper MIME types are supported.
 
+The reason I wrote `httpd` was simple: When using windows machines I do not have to
+install `python` or `nodejs` to run a simple server. For me, `Java` is always there
+on the machines. Also, in some of our `Linux` environments we do not have the ability 
+to download and run `nodejs` - in such environments running a HTTP server via command 
+line to just transfer files, makes it very easy. 
+
+Been using it for a few months now and works for me. Some of the things I use this for:
+
+* transferring huge files (in GBs) between machines
+* testing my `github.com` blog
+* testing prototypes that are static HTML/CSS/JS files
+* and some more...  
 
 Changelog
 ---------
