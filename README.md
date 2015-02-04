@@ -64,7 +64,7 @@ License
 	
 ```
 httpd - simple HTTP server for development
-Copyright (c) 2014, Sandeep Gupta
+Copyright (c) 2014-2015, Sandeep Gupta
 
 http://sangupta.com/projects/httpd
 
