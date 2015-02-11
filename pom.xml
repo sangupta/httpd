@@ -90,7 +90,6 @@
 	</dependencies>
 
 	<build>
-		<finalName>httpd-${project.version}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
