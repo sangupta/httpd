@@ -81,10 +81,9 @@ Downloads
 
 The binary can be downloaded directly from:
 
-**1.0.0**
+**1.0.0**: http://static.sangupta.com/binaries/httpd-1.0.0.jar
 
 ```
-URL: http://static.sangupta.com/binaries/httpd-1.0.0.jar
 MD5: 7feeb06d6505313d381d3d3c4c53ba08
 SHA1: 20fa6d9a0e7dea2a329f14bdebe305fda829a40d
 ```
