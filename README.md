@@ -22,6 +22,7 @@ Changelog
 
 **Current Development**
 
+* Added configuration params: `port`, `path`, `noLogs`, `nosniff`, `noCache`
 
 ** Version 1.0.0**
 
@@ -30,6 +31,37 @@ Changelog
 * Supports `If-Modified-Since` header
 * Supports hidden-files by sending `NOT FOUND` status
 
+Usage
+-----
+
+```text
+NAME
+        httpd - A simple vanilla HTTP server for local development
+
+SYNOPSIS
+        httpd [(-h | --help)] [(-nc | --noCache)] [(-nl | --noLogs)] [--nosniff]
+                [(-p <port> | --port <port>)] [--path <path>]
+
+OPTIONS
+        -h, --help
+            Display help information
+
+        -nc, --noCache
+            Return all files with a no-cache header for browsers. Default is
+            false.
+
+        -nl, --noLogs
+            Do not show any logs when serving request
+
+        --nosniff
+            Add a `X-Content-Type-Options: nosniff` header to all responses
+
+        -p <port>, --port <port>
+            The port to run on. Default is 8180.
+
+        --path <path>
+            The directory to run the server on. Default is current directory.
+```
 
 Downloads
 ---------
