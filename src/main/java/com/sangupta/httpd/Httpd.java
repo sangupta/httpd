@@ -21,8 +21,6 @@
 
 package com.sangupta.httpd;
 
-import java.io.File;
-
 import org.eclipse.jetty.server.Server;
 
 /**
@@ -37,26 +35,31 @@ public class Httpd {
 	 * The port on which the server is to run
 	 * 
 	 */
-	private final int port;
+	private final HttpdConfig httpdConfig;
 
 	/**
 	 * Constructor
 	 * 
 	 * @param port
 	 */
-	public Httpd(int port) {
-		if(port < 1024 || port > 65535) {
-			throw new IllegalArgumentException("Port number to run from should be within 1025-65535 (inclusive)");
-		}
-		
-		this.port = port;
+	public Httpd(HttpdConfig httpdConfig) {
+		this.httpdConfig = httpdConfig;
 	}
 
+	/**
+	 * Start the server
+	 */
 	public void start() {
-		final long startTime = System.currentTimeMillis();
+		// check for validation
+		boolean validated = this.httpdConfig.validate();
+		if(!validated) {
+			return;
+		}
 		
-		Server server = new Server(this.port);
-		server.setHandler(new HttpdHandler(new File(".")));
+		final long startTime = System.currentTimeMillis();
+
+		Server server = new Server(this.httpdConfig.port);
+		server.setHandler(new HttpdHandler(this.httpdConfig));
 		
 		try {
 			server.start();
@@ -68,7 +71,8 @@ public class Httpd {
 		
 		final long endTime = System.currentTimeMillis();
 		try {
-			System.out.println("Server started in " + (endTime - startTime) + " milliseconds on port " + this.port);
+			System.out.println("Server started in " + (endTime - startTime) + " milliseconds on port " + this.httpdConfig.port);
+			System.out.println();
 			server.join();
 		} catch (InterruptedException e) {
 			// server needs to be stopped

@@ -21,6 +21,10 @@
 
 package com.sangupta.httpd;
 
+import com.sangupta.jerry.util.AssertUtils;
+
+import io.airlift.airline.SingleCommand;
+
 
 /**
  * The command line app to fire the HTTPD server.
@@ -34,7 +38,20 @@ public class HttpdMain {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Httpd httpd = new Httpd(8180);
+		HttpdConfig httpdConfig;
+		if(AssertUtils.isEmpty(args)) {
+			// this is a special case - run the server on default values
+			httpdConfig = new HttpdConfig();
+		} else {
+			httpdConfig = SingleCommand.singleCommand(HttpdConfig.class).parse(args);
+
+			if(httpdConfig.helpOption.showHelpIfRequested()) {
+				// show help and return
+				return;
+			}
+		}
+		
+		Httpd httpd = new Httpd(httpdConfig);
 		httpd.start();
 	}
 	

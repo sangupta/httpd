@@ -67,12 +67,18 @@ public class HttpdHandler extends AbstractHandler {
 	protected final File documentRoot;
 	
 	/**
+	 * The configuration instance to use
+	 */
+	protected final HttpdConfig httpdConfig;
+	
+	/**
 	 * Construct an instance of handler for the given document root
 	 * 
 	 * @param documentRoot
 	 */
-	public HttpdHandler(File documentRoot) {
-		this.documentRoot = documentRoot;
+	public HttpdHandler(HttpdConfig httpdConfig) {
+		this.httpdConfig = httpdConfig;
+		this.documentRoot = new File(this.httpdConfig.path);
 	}
 
 	/**
@@ -91,8 +97,10 @@ public class HttpdHandler extends AbstractHandler {
 		try {
 			handleIncomingRequest(request, response);
 		} finally {
-			// log this request
-			logRequest(request, response, requestTime);
+			if(!this.httpdConfig.noLogs) {
+				// log this request
+				logRequest(request, response, requestTime);
+			}
 		}
 		
 		baseRequest.setHandled(true);
@@ -198,10 +206,21 @@ public class HttpdHandler extends AbstractHandler {
 			}
 		}
 		
-		// send back file contents
 		// add mime-header - based on the file extension
 		response.setContentType(MimeUtils.getMimeTypeForFileExtension(FilenameUtils.getExtension(file.getName())));
 		response.setDateHeader("Last-Modified", file.lastModified());
+		
+		// check for no cache
+		if(this.httpdConfig.noCache) {
+			response.addHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+		}
+		
+		// check for no-sniff
+		if(this.httpdConfig.noSniff) {
+			response.addHeader("X-Content-Type-Options", "nosniff");
+		}
+		
+		// send back file contents
 		response.setContentLength((int) file.length());
 		IOUtils.copyLarge(FileUtils.openInputStream(file), response.getOutputStream());
 	}
