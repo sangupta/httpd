@@ -22,6 +22,9 @@ Changelog
 
 **Current Development**
 
+
+** Version 1.0.0**
+
 * Supports Directory Listing
 * Supports correct MIME type
 * Supports `If-Modified-Since` header
@@ -31,7 +34,18 @@ Changelog
 Downloads
 ---------
 
-The library can be downloaded from Maven Central using:
+The binary can be downloaded directly from:
+
+**1.0.0**
+URL: http://static.sangupta.com/binaries/httpd-1.0.0.jar
+MD5: 7feeb06d6505313d381d3d3c4c53ba08
+SHA1: 20fa6d9a0e7dea2a329f14bdebe305fda829a40d
+
+Hacking
+-------
+
+If you would like to hack or use the server in an embedded mode, include the following Maven
+dependency in your project.
 
 ```xml
 <dependency>
