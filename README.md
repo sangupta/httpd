@@ -41,7 +41,8 @@ NAME
         httpd - A simple vanilla HTTP server for local development
 
 SYNOPSIS
-        httpd [(-h | --help)] [(-nc | --noCache)] [(-nl | --noLogs)] [--nosniff]
+        httpd [(-h | --help)] [(-nc | --noCache)] [(-ndl | --noDirList)]
+                [(-ni | --noIndex)] [(-nl | --noLogs)] [--nosniff]
                 [(-p <port> | --port <port>)] [--path <path>]
 
 OPTIONS
@@ -51,6 +52,12 @@ OPTIONS
         -nc, --noCache
             Return all files with a no-cache header for browsers. Default is
             false.
+
+        -ndl, --noDirList
+            Do not show directory listing
+
+        -ni, --noIndex
+            Do not show index page by default
 
         -nl, --noLogs
             Do not show any logs when serving request
