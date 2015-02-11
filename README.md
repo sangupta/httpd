@@ -24,7 +24,7 @@ Changelog
 
 * Added configuration params: `port`, `path`, `noLogs`, `nosniff`, `noCache`
 
-** Version 1.0.0**
+**Version 1.0.0**
 
 * Supports Directory Listing
 * Supports correct MIME type
