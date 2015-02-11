@@ -42,6 +42,7 @@ import org.eclipse.jetty.server.handler.AbstractHandler;
 import com.sangupta.jerry.constants.HttpStatusCode;
 import com.sangupta.jerry.util.AssertUtils;
 import com.sangupta.jerry.util.StringUtils;
+import com.sangupta.jerry.util.UriUtils;
 
 /**
  * Handle all requests from the client
@@ -152,6 +153,31 @@ public class HttpdHandler extends AbstractHandler {
 		
 		// logging
 		if(uri.endsWith("/")) {
+			if(!this.httpdConfig.noIndex) {
+				// check if we have an index file to serve
+				File baseDir = new File(documentRoot, uri);
+				File index = new File(baseDir, "index.html");
+				if(index.exists() && index.isFile() && index.canRead()) {
+					// serve the file
+					sendFileContents(request, response, UriUtils.addWebPaths(uri, "/index.html"));
+					return;
+				}
+				
+				index = new File(baseDir, "index.htm");
+				if(index.exists() && index.isFile() && index.canRead()) {
+					// serve the file
+					sendFileContents(request, response, UriUtils.addWebPaths(uri, "/index.htm"));
+					return;
+				}
+			}
+			
+			if(this.httpdConfig.noDirList) {
+				// do not show dir list
+				response.sendError(HttpStatusCode.FORBIDDEN);
+				return;
+			}
+			
+			// send directory listing
 			showDirectoryListing(response, new File(documentRoot, uri));
 			return;
 		}
@@ -234,19 +260,19 @@ public class HttpdHandler extends AbstractHandler {
 	 */
 	private void showDirectoryListing(HttpServletResponse response, File dir) throws IOException {
 		StringBuilder buf = new StringBuilder();
-		String dirPath = dir.getPath();
-
+		String dirName = dir.getAbsoluteFile().getName();
+		if(AssertUtils.isEmpty(dirName)) {
+			dirName = dir.getAbsoluteFile().getParentFile().getName();
+		}
+		
 		buf.append("<!DOCTYPE html>\r\n");
 		buf.append("<html><head><title>");
 		buf.append("Listing of: ");
-		buf.append(dirPath);
+		buf.append(dirName);
 		buf.append("</title></head><body>\r\n");
 
 		buf.append("<h3>Listing of: ");
-		if(dirPath.startsWith(".")) {
-			dirPath = dirPath.substring(0);
-		}
-		buf.append(dirPath);
+		buf.append(dirName);
 		buf.append("</h3>\r\n");
 
 		buf.append("<ul>");

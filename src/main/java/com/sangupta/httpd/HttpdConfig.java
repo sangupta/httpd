@@ -30,6 +30,12 @@ public class HttpdConfig {
 	
 	@Option(name = { "-nl", "--noLogs" }, description = "Do not show any logs when serving request")
 	public boolean noLogs;
+	
+	@Option(name = { "-ndl", "--noDirList" }, description = "Do not show directory listing")
+	public boolean noDirList;
+	
+	@Option(name = { "-ni", "--noIndex" }, description = "Do not show index page by default")
+	public boolean noIndex;
 
 	public boolean validate() {
 		if(this.port <= 1024 || this.port > 65535) {

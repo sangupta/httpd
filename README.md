@@ -23,6 +23,8 @@ Changelog
 **Current Development**
 
 * Added configuration params: `port`, `path`, `noLogs`, `nosniff`, `noCache`
+* Added default behavior to serve `index.html` or `index.htm` if present in the directory
+* Added option to disable directory listing
 
 **Version 1.0.0**
 
