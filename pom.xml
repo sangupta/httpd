@@ -32,8 +32,8 @@
 	</licenses>
 
 	<scm>
-		<connection>scm:git:git://github.com/sangupta/httpd.git</connection>
-		<developerConnection>scm:git:http://git@github.com/sangupta/httpd.git</developerConnection>
+		<connection>scm:git:https://github.com/sangupta/httpd.git</connection>
+		<developerConnection>scm:git:git@github.com:sangupta/httpd.git</developerConnection>
 		<url>https://github.com/sangupta/httpd</url>
 	</scm>
 
