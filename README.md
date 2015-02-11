@@ -20,7 +20,7 @@ Been using it for a few months now and works for me. Some of the things I use th
 Changelog
 ---------
 
-**Current Development**
+**Version 1.1.0**
 
 * Added configuration params: `port`, `path`, `noLogs`, `nosniff`, `noCache`
 * Added default behavior to serve `index.html` or `index.htm` if present in the directory
@@ -80,6 +80,13 @@ Downloads
 ---------
 
 The binary can be downloaded directly from:
+
+**1.1.0**: http://static.sangupta.com/binaries/httpd-1.1.0.jar
+
+```
+MD5: edbc6d3fd27265d3183f71feb98a100c
+SHA1: e1d5fa9676466651294263d40196c48d2ae69bb8
+```
 
 **1.0.0**: http://static.sangupta.com/binaries/httpd-1.0.0.jar
 
