@@ -25,7 +25,7 @@ public class HttpdConfig {
 	@Option(name = { "--path" }, description = "The directory to run the server on. Default is current directory.")
 	public String path;
 	
-	@Option(name = { "--nosniff" }, description = "Add a `X-Content-Type-Options: nosniff` header to all responses")
+	@Option(name = { "-ns", "--noSniff" }, description = "Add a `X-Content-Type-Options: nosniff` header to all responses")
 	public boolean noSniff;
 	
 	@Option(name = { "-nl", "--noLogs" }, description = "Do not show any logs when serving request")
@@ -36,6 +36,9 @@ public class HttpdConfig {
 	
 	@Option(name = { "-ni", "--noIndex" }, description = "Do not show index page by default")
 	public boolean noIndex;
+	
+	@Option(name = { "-ne", "--noEtag" }, description = "Do not generate the weak ETAGs")
+	public boolean noEtag;
 
 	public boolean validate() {
 		if(this.port <= 1024 || this.port > 65535) {

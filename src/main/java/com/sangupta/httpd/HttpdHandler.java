@@ -41,6 +41,7 @@ import org.eclipse.jetty.server.handler.AbstractHandler;
 
 import com.sangupta.jerry.constants.HttpStatusCode;
 import com.sangupta.jerry.util.AssertUtils;
+import com.sangupta.jerry.util.HashUtils;
 import com.sangupta.jerry.util.StringUtils;
 import com.sangupta.jerry.util.UriUtils;
 
@@ -214,6 +215,16 @@ public class HttpdHandler extends AbstractHandler {
 			return;
 		}
 		
+		String etag = null;
+		if(!this.httpdConfig.noEtag) {
+			// compute the weak ETAG based on file time and size
+			final long time = file.lastModified();
+			final long size = file.length();
+			final String name = file.getName();
+			
+			etag = "w/" + HashUtils.getMD5Hex(name + ":" + size + ":" + time);
+		}		
+		
 		// check for if-modified-since header name
 		String ifModifiedSince = request.getHeader("If-Modified-Since");
 		if (ifModifiedSince != null && !ifModifiedSince.isEmpty()) {
@@ -244,6 +255,11 @@ public class HttpdHandler extends AbstractHandler {
 		// check for no-sniff
 		if(this.httpdConfig.noSniff) {
 			response.addHeader("X-Content-Type-Options", "nosniff");
+		}
+		
+		// etag
+		if(!this.httpdConfig.noEtag) {
+			response.addHeader("Etag", etag);
 		}
 		
 		// send back file contents

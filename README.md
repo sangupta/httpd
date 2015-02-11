@@ -25,6 +25,7 @@ Changelog
 * Added configuration params: `port`, `path`, `noLogs`, `nosniff`, `noCache`
 * Added default behavior to serve `index.html` or `index.htm` if present in the directory
 * Added option to disable directory listing
+* Added weak etags based on file name, time and size. Also, an option to disable etag generation.
 
 **Version 1.0.0**
 
@@ -42,8 +43,8 @@ NAME
 
 SYNOPSIS
         httpd [(-h | --help)] [(-nc | --noCache)] [(-ndl | --noDirList)]
-                [(-ni | --noIndex)] [(-nl | --noLogs)] [--nosniff]
-                [(-p <port> | --port <port>)] [--path <path>]
+                [(-ne | --noEtag)] [(-ni | --noIndex)] [(-nl | --noLogs)]
+                [(-ns | --noSniff)] [(-p <port> | --port <port>)] [--path <path>]
 
 OPTIONS
         -h, --help
@@ -56,13 +57,16 @@ OPTIONS
         -ndl, --noDirList
             Do not show directory listing
 
+        -ne, --noEtag
+            Do not generate the weak ETAGs
+
         -ni, --noIndex
             Do not show index page by default
 
         -nl, --noLogs
             Do not show any logs when serving request
 
-        --nosniff
+        -ns, --noSniff
             Add a `X-Content-Type-Options: nosniff` header to all responses
 
         -p <port>, --port <port>
