@@ -51,7 +51,19 @@ public class HttpdMain {
 			}
 		}
 		
-		Httpd httpd = new Httpd(httpdConfig);
+		// create the instance
+		final Httpd httpd = new Httpd(httpdConfig);
+		
+		// add shutdown hook
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+			
+			@Override
+			public void run() {
+				httpd.stop();
+			}
+			
+		});
+		
 		httpd.start();
 	}
 	

@@ -38,6 +38,11 @@ public class Httpd {
 	private final HttpdConfig httpdConfig;
 
 	/**
+	 * The server instance that we use
+	 */
+	private Server server;
+	
+	/**
 	 * Constructor
 	 * 
 	 * @param port
@@ -58,7 +63,7 @@ public class Httpd {
 		
 		final long startTime = System.currentTimeMillis();
 
-		Server server = new Server(this.httpdConfig.port);
+		server = new Server(this.httpdConfig.port);
 		server.setHandler(new HttpdHandler(this.httpdConfig));
 		
 		try {
@@ -79,6 +84,18 @@ public class Httpd {
 		}
 		
 		System.out.println("Bye!");
+	}
+	
+	/**
+	 * Close down the server
+	 * 
+	 */
+	public void stop() {
+		try {
+			this.server.stop();
+		} catch (Exception e) {
+			// eat this up
+		}
 	}
 
 }
