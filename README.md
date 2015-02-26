@@ -20,6 +20,10 @@ Been using it for a few months now and works for me. Some of the things I use th
 Changelog
 ---------
 
+**Version 1.2.1**
+
+* Added MIME extension for `log` files to `text/plain`
+
 **Version 1.2.0**
 
 * Added clean exit when a user presses Ctrl+C to end the session
