@@ -137,6 +137,7 @@ public class MimeUtils {
 		EXTENSION_MIME_MAP.put("sh", "text/plain");
 		EXTENSION_MIME_MAP.put("zsh", "text/plain");
 		EXTENSION_MIME_MAP.put("bat", "text/plain");
+		EXTENSION_MIME_MAP.put("log", "text/plain");
 	}
 
 	public static String getMimeTypeForFileExtension(String extension) {
